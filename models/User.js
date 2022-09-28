@@ -12,11 +12,13 @@ const User = db.define(
         name: {
             type: Sequelize.STRING,
         },
-        past: {
-            type: Sequelize.JSON,
-        },
         active: {
-            type: Sequelize.JSON,
+            type: Sequelize.ARRAY(Sequelize.JSON),
+            allowNull: true
+        },
+        past: {
+            type: Sequelize.ARRAY(Sequelize.JSON),
+            allowNull: true
         },
         createdAt: {
             type: Sequelize.DATE,

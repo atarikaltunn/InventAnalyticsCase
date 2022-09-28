@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
         })
         .catch((err) => {
             console.log('Error: ' + err);
-            res.status(400)
+            res.status(500)
         });
     // res.send("get localhost/books")
 });
@@ -67,7 +67,7 @@ router.get('/:id', async (req, res) => {
         .catch((err) => {
             console.log('****Error occured while getting a book!*****');
             console.log('Error: ' + err);
-            res.status(400);
+            res.status(500);
         });
 
     // res.send("get localhost/books/:id")
@@ -90,13 +90,24 @@ router.post('/', async (req, res) => {
     })
         .then(() => {
             console.log('book added succesfully');
-            res.status(201);
+            res.status(201).send(`book ${name} added succesfully`);
         })
         .catch((err) => {
             console.log('***Error occured while adding a book****');
             console.log(err);
+            res.status(500).send(`Error occured while adding a book: ${name}`)
         });
     // res.send("post localhost/books")
 });
+
+// router.get('/delete/deleteAll', async (req, res) => {
+//     await Book.destroy({ truncate: true })
+//         .then(() => console.log('deleted succesfully'))
+//         .catch((err) => {
+//             console.log('*****Error occured while deleting all books*****');
+//             console.log('Error: ' + err);
+//         });
+// });
+
 
 module.exports = router;
