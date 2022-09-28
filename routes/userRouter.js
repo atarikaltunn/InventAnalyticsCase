@@ -23,6 +23,7 @@ router.route('/:id').get(userController.getUser);
 
 //Create User
 router.route('/').post(
+    // validation to check name length
     body(
         'name',
         'Name length should not be less than 6, no longer than 43(safety rules)' //no one gonna know...
@@ -38,11 +39,11 @@ router.route('/').post(
         }
         next();
     },
-    //validation that checks if name contains letters and spaces
+    // validation to check name characters
     body(
         'name',
-        'Name can only contain letters and spaces' 
-    ).matches(/[a-zA-Z ]*$/),
+        'Name only can contain letters and spaces' 
+    ).matches(/^[A-Za-zğüşöçıİĞÜŞÖÇ\s]+$/),
     (req, res, next) => {
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);
