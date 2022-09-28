@@ -1,0 +1,41 @@
+-- Table: public.user
+
+-- DROP TABLE IF EXISTS public."user";
+
+CREATE TABLE IF NOT EXISTS public."user"
+(
+    id integer DEFAULT nextval('user_id_seq'::regclass),
+    name character varying COLLATE pg_catalog."default",
+    "updatedAt" date,
+    past json[],
+    active json[],
+    "createdAt" date
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."user"
+    OWNER to atarikaltunn;
+
+----------------------------------------------------------------------------------------------
+
+-- Table: public.book
+
+-- DROP TABLE IF EXISTS public.book;
+
+CREATE TABLE IF NOT EXISTS public.book
+(
+    id integer NOT NULL DEFAULT nextval('book_id_seq'::regclass),
+    name character varying COLLATE pg_catalog."default",
+    "createdAt" date,
+    "updatedAt" date,
+    "isTaken" boolean DEFAULT false,
+    "totalScoreCount" integer DEFAULT 0,
+    score real DEFAULT 0,
+    CONSTRAINT book_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.book
+    OWNER to atarikaltunn;
