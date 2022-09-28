@@ -1,3 +1,5 @@
+//database config file
+
 const { Sequelize } = require("sequelize");
 
 //Database Connection

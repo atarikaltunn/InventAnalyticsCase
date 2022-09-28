@@ -1,3 +1,5 @@
+// a model file that contains schema of book
+
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 

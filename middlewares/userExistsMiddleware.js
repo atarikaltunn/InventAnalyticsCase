@@ -1,3 +1,5 @@
+//a middleware that controls if user with given id is exist or not
+
 const express = require('express');
 const db = require('../config/database');
 const User = require('../models/User');

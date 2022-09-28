@@ -1,3 +1,6 @@
+//a middleware that controls user have a book or not. If user have a book then
+//user is able to return a book.
+
 const express = require('express');
 const db = require('../config/database');
 const User = require('../models/User');

@@ -1,3 +1,6 @@
+// a model file that contains schema of user
+
+
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 

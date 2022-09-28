@@ -1,3 +1,6 @@
+//the middleware that controls the book is taken or not. If a book is taken then middleware
+//allows the process returning book. So we ensure that not taken books can not be returned.
+
 const express = require('express');
 const db = require('../config/database');
 const Book = require('../models/Book');

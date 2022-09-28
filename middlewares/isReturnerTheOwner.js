@@ -1,3 +1,7 @@
+//a middleware that controls if borrower of book and person wants to return a book are same.
+//By controlling this we ensure that book can not get returned by someone else than borrower.
+//the main control process is at line 16. 
+
 const express = require('express');
 const db = require('../config/database');
 const User = require('../models/User');

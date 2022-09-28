@@ -1,3 +1,6 @@
+//a middleware that controls a user who wants to borrow a book has a book or not.
+//if user has a book, middleware does not allow user to borrow new one without returning old book.
+
 const express = require('express');
 const db = require('../config/database');
 const User = require('../models/User');
