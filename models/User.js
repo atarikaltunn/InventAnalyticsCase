@@ -1,33 +1,33 @@
-const Sequelize = require("sequelize");
-const db = require("../config/database");
+const Sequelize = require('sequelize');
+const db = require('../config/database');
 
 const User = db.define(
-  "user",
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
+    'user',
+    {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        name: {
+            type: Sequelize.STRING,
+        },
+        past: {
+            type: Sequelize.JSON,
+        },
+        active: {
+            type: Sequelize.JSON,
+        },
+        createdAt: {
+            type: Sequelize.DATE,
+        },
+        updatedAt: {
+            type: Sequelize.DATE,
+        },
     },
-    name: {
-      type: Sequelize.STRING,
-    },
-    past: {
-      type: Sequelize.JSON,
-    },
-    active: {
-      type: Sequelize.JSON,
-    },
-    createdAt: {
-        type: Sequelize.DATE
-    },
-    updatedAt: {
-        type: Sequelize.DATE
+    {
+        freezeTableName: true,
     }
-  },
-  {
-    freezeTableName: true,
-  }
 );
-
 
 module.exports = User;

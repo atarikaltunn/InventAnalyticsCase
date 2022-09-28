@@ -1,12 +1,13 @@
 const Sequelize = require("sequelize");
 const db = require("../config/database");
 
-const User = db.define(
-  "user",
+const Book = db.define(
+  "book",
   {
     id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
     },
     name: {
       type: Sequelize.STRING,
@@ -27,4 +28,4 @@ const User = db.define(
 );
 
 
-module.exports = User;
+module.exports = Book;

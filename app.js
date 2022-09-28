@@ -13,6 +13,10 @@ sequelize
   .then(() => console.log("Database Connected"))
   .catch((err) => console.log("Error: " + err));
 
+//Middlewares
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 //ROUTES
 app.use("/users", userRoute);
 app.use("/books", bookRoute);
