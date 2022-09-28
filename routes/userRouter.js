@@ -41,8 +41,62 @@ router.get('/', async (req, res) => {
 
 //Get User
 router.get('/:id', async (req, res) => {
-    console.log(req.params.id);
-    // const user = await User.findOne({ where: { id: req.params.id } });
+    await User.findOne({ where: { id: req.params.id } })
+        .then((findedUser) => {
+            if (findedUser) {
+                if (findedUser.past && findedUser.active) {
+                    var user = {
+                        id: findedUser.id,
+                        name: findedUser.name,
+                        books: {
+                            past: findedUser.past,
+                            present: findedUser.active,
+                        },
+                    };
+                    res.send(user).status(200);
+                } else if (findedUser.past && !findedUser.active) {
+                    var user = {
+                        id: findedUser.id,
+                        name: findedUser.name,
+                        books: {
+                            past: findedUser.past,
+                            present: [],
+                        },
+                    };
+                    res.send(user).status(200);
+                } else if (!findedUser.past && findedUser.active) {
+                    var user = {
+                        id: findedUser.id,
+                        name: findedUser.name,
+                        books: {
+                            past: [],
+                            present: findedUser.active,
+                        },
+                    };
+                    res.send(user).status(200);
+                } else {
+                    var user = {
+                        id: findedUser.id,
+                        name: findedUser.name,
+                        books: {
+                            past: [],
+                            present: [],
+                        },
+                    };
+                    res.send(user).status(200);
+                }
+            } else {
+                console.log(
+                    `searching book with id: ${req.params.id} is not found`
+                );
+                res.sendStatus(404);
+            }
+        })
+        .catch((err) => {
+            console.log('****Error occured while getting a book!*****');
+            console.log('Error: ' + err);
+            res.status(500);
+        });
 });
 
 //Create User
@@ -175,9 +229,9 @@ router
 
             const user = await User.findOne({ where: { id: userID } });
             const book = await Book.findOne({ where: { id: bookID } });
-            
+
             score =
-                ((book.score * book.totalScoreCount) + score) /
+                (book.score * book.totalScoreCount + score) /
                 (book.totalScoreCount + 1);
 
             console.log(score);
@@ -186,7 +240,7 @@ router
                     ...user.past,
                     {
                         name: book.name,
-                        score: score,
+                        score: req.body.score,
                     },
                 ];
             } else {
@@ -194,11 +248,10 @@ router
                     {
                         ...user.past,
                         name: book.name,
-                        score: score,
+                        score: req.body.score,
                     },
                 ];
             }
-            bookScore = book.score;
 
             await User.update(
                 { past: past, active: null },
@@ -212,8 +265,8 @@ router
                     await Book.update(
                         {
                             isTaken: false,
-                            score: req.body.score,
-                            totalScoreCount: book.totalScoreCount + 1
+                            score: score,
+                            totalScoreCount: book.totalScoreCount + 1,
                         },
                         {
                             where: {
@@ -243,7 +296,9 @@ router
                     );
                 })
                 .catch((err) => {
-                    console.log(`An error occured while returning the book: ${book.name} by ${user.name}`);
+                    console.log(
+                        `An error occured while returning the book: ${book.name} by ${user.name}`
+                    );
                     console.log('Error: ' + err);
                     // res.status(500).send(`An error occured while returning the book: ${book.name} by ${user.name}`);
                 });
