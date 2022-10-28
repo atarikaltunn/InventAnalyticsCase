@@ -1,8 +1,6 @@
 //a router that routes requests about localhost/books
 
 const express = require('express');
-const db = require('../config/database');
-const Book = require('../models/Book');
 const bookController = require('../controller/bookController');
 
 const router = express.Router();

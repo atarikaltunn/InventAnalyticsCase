@@ -154,7 +154,7 @@ async function updateBookOnBorrow(bookID, res) {
         }
     ).catch((err) => logError(err, updateBookOnBorrow.name, res));
 }
-async function updateUserOnBorrow(user, book, userID, active, res) {
+async function updateUserOnBorrow(userID, active, res) {
     await User.update(
         //updates user
         {
