@@ -1,10 +1,11 @@
 //database config file
 
 const { Sequelize } = require("sequelize");
+require('dotenv').config()
 
 //Database Connection
-module.exports = new Sequelize("library", "atarikaltunn", "Istanbul123", {
-    host: "localhost",
+module.exports = new Sequelize(process.env.DBNAME, process.env.DBUSERNAME, process.env.DBPASSWORD, {
+    host: process.env.HOST,
     dialect: "postgres",
     pool: {
       max: 5,
